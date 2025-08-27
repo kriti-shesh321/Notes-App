@@ -2,7 +2,7 @@
 
 A small, end-to-end notes app to demonstrate **auth + CRUD** with a clean, minimal stack.
 
-[🌐 Live Demo (Netlify)](https://asian-delight.netlify.app)
+[🌐 Live Demo (Netlify)](https://notes-add-app.netlify.app)
 
 - **Frontend:** React (Vite) + Tailwind v3 + Context API  
 - **Backend:** FastAPI + SQLAlchemy + JWT (HS256)  
