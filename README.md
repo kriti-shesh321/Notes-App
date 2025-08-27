@@ -119,7 +119,7 @@ Tailwind v3 is pre-wired. App runs on `http://localhost:5173`.
 ```json
 { "id": 4, "title": "Updated", "content": "Changed", "updated_at": "server time" }
 ```
-**on stale**: `409 Conflict`.
+**on stale note update**: `409 Conflict`.
 
 `DELETE /notes/{id}` → `204 No Content`
 
