@@ -1,4 +1,4 @@
-const BASE = "http://127.0.0.1:8000";
+const BASE = "https://notes-app-production-90ed.up.railway.app" || "http://127.0.0.1:8000";
 
 export default async function api(path, { token, method="GET", body } = {}) {
   const res = await fetch(BASE + path, {
