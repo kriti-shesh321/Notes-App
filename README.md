@@ -3,8 +3,8 @@
 A full-stack notes application demonstrating secure authentication and CRUD operations for Notes.
 
 **Live Demo:** https://notes-add-app.netlify.app  
-**API Base URL:** https://notes-app-production-c23f.up.railway.app 
-**API Documentation:** [Postman docs link]
+**API Base URL:** https://notes-app-production-c23f.up.railway.app
+**API Documentation:** https://documenter.getpostman.com/view/17086606/2sBXqFNNCY
 
 ## Tech Stack
 - **Backend:** FastAPI, SQLAlchemy, JWT (HS256)
@@ -17,7 +17,7 @@ A full-stack notes application demonstrating secure authentication and CRUD oper
 - Protected routes - token required for all note operations
 - Full CRUD for notes (create, read, update, delete)
 - Stale update prevention using `updated_at` timestamp (returns 409 on conflict)
-- Input validation and structured error responses
+- Input validation with structured error responses(404, 409, 422)
 
 ## Setup
 
@@ -43,24 +43,30 @@ Then comment it out again after tables are created.
 ```bash
 cd frontend
 npm install
+# Copy .env.example to .env and fill in values
 npm run dev
 ```
 
 ## API Overview
 
 ### Auth
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | /auth/register | Register new user |
-| POST | /auth/login | Login, returns JWT |
+| Method | Endpoint       | Description        |
+| ------ | -------------- | ------------------ |
+| POST   | /auth/register | Register new user  |
+| POST   | /auth/login    | Login, returns JWT |
 
 ### Notes (all require Authorization header)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | /notes | Get all notes for user |
-| POST | /notes | Create new note |
-| PUT | /notes/{id} | Update note |
-| DELETE | /notes/{id} | Delete note |
+**Example Authorization Header:**
+```
+Authorization: Bearer <your_token>
+```
+
+| Method | Endpoint    | Description            |
+| ------ | ----------- | ---------------------- |
+| GET    | /notes      | Get all notes for user |
+| POST   | /notes      | Create new note        |
+| PUT    | /notes/{id} | Update note            |
+| DELETE | /notes/{id} | Delete note            |
 
 Full request/response examples in Postman collection: `/docs/postman-collection.json`
 
@@ -69,6 +75,9 @@ Full request/response examples in Postman collection: `/docs/postman-collection.
 - PostgreSQL schema supports additional entities with minimal changes
 - Redis caching can be added for frequently accessed note lists
 - Project structure is modular - new feature modules drop into `/app` cleanly
+
+## Future Improvements
+- Role-based access (admin vs user) can be added by extending the User model with a `role` field and enforcing route-level permissions.
 - Can be containerized with Docker for consistent deployment
 
 ## Author

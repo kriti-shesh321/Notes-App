@@ -1,0 +1,773 @@
+{
+	"info": {
+		"_postman_id": "8e95a4a2-492b-468e-86b3-31f85d6b38ad",
+		"name": "Notes App",
+		"description": "A full-stack notes application demonstrating secure authentication and CRUD operations for Notes.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "17086606",
+		"_collection_link": "https://test44-4738.postman.co/workspace/1e424714-dd83-4b78-8fb9-926335bd3fbf/collection/17086606-8e95a4a2-492b-468e-86b3-31f85d6b38ad?action=share&source=collection_link&creator=17086606"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Kurama\",\n    \"password\": \"asdfghjkl\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{apiURL}}/auth/register",
+						"description": "Register a new user with username, and password."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"Kurama\",\n    \"password\": \"asdfghjkl\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{apiURL}}/auth/register"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "x-railway-cdn-edge",
+									"value": "fastly/cache-bom-vanm7210098-BOM"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 22 Apr 2026 13:31:55 GMT"
+								},
+								{
+									"key": "server",
+									"value": "railway-edge"
+								},
+								{
+									"key": "x-railway-edge",
+									"value": "railway/asia-southeast1-eqsg3a"
+								},
+								{
+									"key": "x-railway-request-id",
+									"value": "fRqSGDQ9SrKxfpiKoB_USg"
+								},
+								{
+									"key": "x-cache",
+									"value": "MISS"
+								},
+								{
+									"key": "x-cache-hits",
+									"value": "0"
+								},
+								{
+									"key": "x-served-by",
+									"value": "cache-bom-vanm7210098-BOM"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"afef24ef-8734-4e7a-a42d-e5410340f52c\",\n    \"username\": \"Kurama\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"pm.environment.set(\"authToken\", response.access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Kurama\",\n    \"password\": \"asdfghjkl\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{apiURL}}/auth/login",
+						"description": "Authenticate user and return access token."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"Kurama\",\n    \"password\": \"asdfghjkl\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{apiURL}}/auth/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "229"
+								},
+								{
+									"key": "x-railway-cdn-edge",
+									"value": "fastly/cache-bom-vanm7210098-BOM"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 22 Apr 2026 13:32:51 GMT"
+								},
+								{
+									"key": "server",
+									"value": "railway-edge"
+								},
+								{
+									"key": "x-railway-edge",
+									"value": "railway/asia-southeast1-eqsg3a"
+								},
+								{
+									"key": "x-railway-request-id",
+									"value": "RkknQXfsSR6D_wQQmrpb1w"
+								},
+								{
+									"key": "x-cache",
+									"value": "MISS"
+								},
+								{
+									"key": "x-cache-hits",
+									"value": "0"
+								},
+								{
+									"key": "x-served-by",
+									"value": "cache-bom-vanm7210098-BOM"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZmVmMjRlZi04NzM0LTRlN2EtYTQyZC1lNTQxMDM0MGY1MmMiLCJpYXQiOjE3NzY4NjQ3NzIsImV4cCI6MTc3Njg2ODM3Mn0.dUuuWu1vGUmHnFXeZKGmi-3EdEjD9KIx5NPdBG4W3Wk\",\n    \"token_type\": \"bearer\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Handles user registration and authentication."
+		},
+		{
+			"name": "Notes",
+			"item": [
+				{
+					"name": "Create Note",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Todo\",\n    \"content\": \"Laundry\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{apiURL}}/notes",
+						"description": "Create a new note."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Todo\",\n    \"content\": \"Laundry\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{apiURL}}/notes"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "86"
+								},
+								{
+									"key": "x-railway-cdn-edge",
+									"value": "fastly/cache-bom-vanm7210038-BOM"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 22 Apr 2026 13:35:25 GMT"
+								},
+								{
+									"key": "server",
+									"value": "railway-edge"
+								},
+								{
+									"key": "x-railway-edge",
+									"value": "railway/asia-southeast1-eqsg3a"
+								},
+								{
+									"key": "x-railway-request-id",
+									"value": "PmPTEu-_SiaQJD5uV7rehQ"
+								},
+								{
+									"key": "x-cache",
+									"value": "MISS"
+								},
+								{
+									"key": "x-cache-hits",
+									"value": "0"
+								},
+								{
+									"key": "x-served-by",
+									"value": "cache-bom-vanm7210038-BOM"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"title\": \"Todo\",\n    \"content\": \"Laundry\",\n    \"updated_at\": \"2026-04-22T13:35:25.842543Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "List Notes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{apiURL}}/notes",
+						"description": "Get list of notes."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{apiURL}}/notes"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "88"
+								},
+								{
+									"key": "x-railway-cdn-edge",
+									"value": "fastly/cache-bom-vanm7210087-BOM"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 22 Apr 2026 13:37:17 GMT"
+								},
+								{
+									"key": "server",
+									"value": "railway-edge"
+								},
+								{
+									"key": "x-railway-edge",
+									"value": "railway/asia-southeast1-eqsg3a"
+								},
+								{
+									"key": "x-railway-request-id",
+									"value": "PaZzKfpiRu2d6xBJipRofQ"
+								},
+								{
+									"key": "x-cache",
+									"value": "MISS"
+								},
+								{
+									"key": "x-cache-hits",
+									"value": "0"
+								},
+								{
+									"key": "x-served-by",
+									"value": "cache-bom-vanm7210087-BOM"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"Todo\",\n        \"content\": \"Laundry\",\n        \"updated_at\": \"2026-04-22T13:35:25.842543Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Update Note",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"Read a book.\",\n    \"updated_at\": \"2026-04-22T14:34:14.286341Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{apiURL}}/notes/2",
+						"description": "Update an existing note."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Todo Today\",\n    \"updated_at\": \"2026-04-22T14:05:14.690452Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{apiURL}}/notes/1"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "92"
+								},
+								{
+									"key": "x-railway-cdn-edge",
+									"value": "fastly/cache-bom-vanm7210067-BOM"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 22 Apr 2026 14:05:33 GMT"
+								},
+								{
+									"key": "server",
+									"value": "railway-edge"
+								},
+								{
+									"key": "x-railway-edge",
+									"value": "railway/asia-southeast1-eqsg3a"
+								},
+								{
+									"key": "x-railway-request-id",
+									"value": "O0CD1UhBQEKZV2Ghmrpb1w"
+								},
+								{
+									"key": "x-cache",
+									"value": "MISS"
+								},
+								{
+									"key": "x-cache-hits",
+									"value": "0"
+								},
+								{
+									"key": "x-served-by",
+									"value": "cache-bom-vanm7210067-BOM"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"title\": \"Todo Today\",\n    \"content\": \"Laundry\",\n    \"updated_at\": \"2026-04-22T14:05:34.447870Z\"\n}"
+						},
+						{
+							"name": "Note Not Found Error",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"content\": \"Read a book.\",\n    \"updated_at\": \"2026-04-22T14:05:34.447870Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{apiURL}}/notes/1"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "x-railway-cdn-edge",
+									"value": "fastly/cache-bom-vanm7210066-BOM"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 22 Apr 2026 14:34:33 GMT"
+								},
+								{
+									"key": "server",
+									"value": "railway-edge"
+								},
+								{
+									"key": "x-railway-edge",
+									"value": "railway/asia-southeast1-eqsg3a"
+								},
+								{
+									"key": "x-railway-request-id",
+									"value": "yTqwnrMLRViFUeuXmrpb1w"
+								},
+								{
+									"key": "x-cache",
+									"value": "MISS"
+								},
+								{
+									"key": "x-cache-hits",
+									"value": "0"
+								},
+								{
+									"key": "x-served-by",
+									"value": "cache-bom-vanm7210066-BOM"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Note not found\"\n}"
+						},
+						{
+							"name": "Stale Note Error",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"content\": \"Read a book.\",\n    \"updated_at\": \"2026-04-22T14:05:34.447870Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{apiURL}}/notes/2"
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "x-railway-cdn-edge",
+									"value": "fastly/cache-bom-vanm7210066-BOM"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 22 Apr 2026 14:35:09 GMT"
+								},
+								{
+									"key": "server",
+									"value": "railway-edge"
+								},
+								{
+									"key": "x-railway-edge",
+									"value": "railway/asia-southeast1-eqsg3a"
+								},
+								{
+									"key": "x-railway-request-id",
+									"value": "e-RBDblrQXazqS2TacI7Nw"
+								},
+								{
+									"key": "x-cache",
+									"value": "MISS"
+								},
+								{
+									"key": "x-cache-hits",
+									"value": "0"
+								},
+								{
+									"key": "x-served-by",
+									"value": "cache-bom-vanm7210066-BOM"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Stale update. Reload the note.\"\n}"
+						},
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"content\": \"Read a book.\",\n    \"updated_at\": \"2026-04-22T14:34:14.286341Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{apiURL}}/notes/2"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "91"
+								},
+								{
+									"key": "x-railway-cdn-edge",
+									"value": "fastly/cache-bom-vanm7210066-BOM"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 22 Apr 2026 14:35:47 GMT"
+								},
+								{
+									"key": "server",
+									"value": "railway-edge"
+								},
+								{
+									"key": "x-railway-edge",
+									"value": "railway/asia-southeast1-eqsg3a"
+								},
+								{
+									"key": "x-railway-request-id",
+									"value": "YO2WhWDvQcyvYt4u-8Y8hA"
+								},
+								{
+									"key": "x-cache",
+									"value": "MISS"
+								},
+								{
+									"key": "x-cache-hits",
+									"value": "0"
+								},
+								{
+									"key": "x-served-by",
+									"value": "cache-bom-vanm7210066-BOM"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"title\": \"Todo\",\n    \"content\": \"Read a book.\",\n    \"updated_at\": \"2026-04-22T14:35:47.765398Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Note",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{apiURL}}/notes/1",
+						"description": "Delete a note by id."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": "{{apiURL}}/notes/1"
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 22 Apr 2026 14:06:29 GMT"
+								},
+								{
+									"key": "server",
+									"value": "railway-edge"
+								},
+								{
+									"key": "x-railway-edge",
+									"value": "railway/asia-southeast1-eqsg3a"
+								},
+								{
+									"key": "x-railway-request-id",
+									"value": "NvACSY_xRoiwePPwmrpb1w"
+								},
+								{
+									"key": "x-cache",
+									"value": "MISS"
+								},
+								{
+									"key": "x-cache-hits",
+									"value": "0"
+								},
+								{
+									"key": "x-railway-cdn-edge",
+									"value": "fastly/cache-bom-vanm7210067-BOM"
+								},
+								{
+									"key": "x-served-by",
+									"value": "cache-bom-vanm7210067-BOM"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "CRUD operations for notes."
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "{{authToken}}"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "apiURL",
+			"value": "https://notes-app-production-c23f.up.railway.app"
+		}
+	]
+}
