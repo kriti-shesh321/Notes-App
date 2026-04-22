@@ -1,130 +1,67 @@
-# Notes App — React + FastAPI + Postgres
+# Notes App — REST API with Auth & CRUD
 
-A small, end-to-end notes app to demonstrate **auth + CRUD** with a clean, minimal stack.
+A full-stack notes application demonstrating secure authentication and CRUD operations.
 
-[🌐 Live Demo (Netlify)](https://notes-add-app.netlify.app)
+**Live Demo:** https://notes-add-app.netlify.app  
+**API Base URL:** [your Railway URL]  
+**API Documentation:** [Postman docs link]
 
-- **Frontend:** React (Vite) + Tailwind v3 + Context API  
-- **Backend:** FastAPI + SQLAlchemy + JWT (HS256)  
-- **DB:** PostgreSQL (hosted on Railway). Works locally too.
+## Tech Stack
+- **Backend:** FastAPI, SQLAlchemy, JWT (HS256)
+- **Frontend:** React (Vite), Tailwind CSS, Context API
+- **Database:** PostgreSQL (Railway)
+- **Deployment:** Railway (backend), Netlify (frontend)
 
-I focused on delivering something simple: register/login and list/create/edit/delete notes.
+## Features
+- User registration and login with JWT authentication
+- Protected routes - token required for all note operations
+- Full CRUD for notes (create, read, update, delete)
+- Stale update prevention using `updated_at` timestamp (returns 409 on conflict)
+- Input validation and structured error responses
 
----
+## Setup
 
-## Why this stack
-
-**JWT auth** over cookies/OAuth because it’s:
-- **Stateless & simple** — FastAPI just verifies the token each request; no server session store.
-- **SPA-friendly** — `Authorization: Bearer <token>` fits nicely with `fetch`.
-- **Fast to demo** — no OAuth client IDs/redirects or CSRF wiring.
-
----
-
-## What’s implemented
-
-- Register → Login → store JWT (using Context API + localStorage)  
-- Notes: list, create, edit, delete (for logged in users)  
-- **Stale Note Update Prevention** - on update using `updated_at`, prevents stale overwrites (returns **409** if the note is old)
-
----
-
-## Quick start
-
-### 1) Backend
-
+### Backend
 ```bash
 cd backend
 python -m venv venv
-source venv/bin/activate           # Windows: venv\Scripts\Activate.ps1
-pip install -r requirements.txt    
-```
-
-Create `.env` (example): use .env.example as reference
-
-Run:
-```bash
+source venv/bin/activate
+pip install -r requirements.txt
+# Copy .env.example to .env and fill in values
 uvicorn app.main:app --reload --env-file .env
 ```
 
-> Tables are created on startup via `Base.metadata.create_all(...)` - uncomment that line from main.py file.  
-> Once confirmed in DB, you can comment that line out.
-
-### 2) Frontend
-
+### Frontend
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-Tailwind v3 is pre-wired. App runs on `http://localhost:5173`. 
-
----
-
-## API (shapes you can count on)
-
-**All `/notes` routes require**: `Authorization: Bearer <token>`
+## API Overview
 
 ### Auth
-`POST /auth/register`  
-**req**:
-```json
-{ "username": "JOhn", "password": "secret" }
-```
-**res**:
-```json
-{ "id": "uuid", "username": "John" }
-```
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | /auth/register | Register new user |
+| POST | /auth/login | Login, returns JWT |
 
-`POST /auth/login`  
-**req**:
-```json
-{ "username": "John", "password": "secret" }
-```
-**res**:
-```json
-{ "access_token": "JWT", "token_type": "bearer" }
-```
+### Notes (all require Authorization header)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | /notes | Get all notes for user |
+| POST | /notes | Create new note |
+| PUT | /notes/{id} | Update note |
+| DELETE | /notes/{id} | Delete note |
 
-### Notes
-`GET /notes`  
-**res**:
-```json
-[
-  { "id": 3, "title": "Hello", "content": "World", "updated_at": "2025-08-27T12:10:15.123456+00:00" }
-]
-```
+Full request/response examples in Postman collection: `/docs/postman-collection.json`
 
-`POST /notes`  
-**req**:
-```json
-{ "title": "New", "content": "Optional" }
-```
-**res**:
-```json
-{ "id": 4, "title": "New", "content": "Optional", "updated_at": "..." }
-```
+## Scalability Notes
+- Stateless JWT auth scales horizontally with no session store
+- PostgreSQL schema supports additional entities with minimal changes
+- Redis caching can be added for frequently accessed note lists
+- Project structure is modular - new feature modules drop into `/app` cleanly
+- Can be containerized with Docker for consistent deployment
 
-`PUT /notes/{id}` 
-**req**:
-```json
-{
-  "title": "Updated",
-  "content": "Changed",
-  "updated_at": "2025-08-27T12:10:15.123456+00:00" 
-}
-```
-**res**:
-```json
-{ "id": 4, "title": "Updated", "content": "Changed", "updated_at": "server time" }
-```
-**on stale note update**: `409 Conflict`.
-
-`DELETE /notes/{id}` → `204 No Content`
-
----
-
-## 🧑‍💻 Author
-
-Made by Kriti Shrivastav — feel free to connect!
+## Author
+Kriti Shrivastav

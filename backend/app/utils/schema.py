@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import Optional
 from uuid import UUID
 
-# ---------- Auth ----------
+# Auth
 class UserCreate(BaseModel):
     username: str
     password: str
@@ -18,7 +18,7 @@ class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
 
-# ---------- Notes ----------
+# Notes
 class NoteCreate(BaseModel):
     title: str = Field(min_length=1)
     content: Optional[str] = ""
