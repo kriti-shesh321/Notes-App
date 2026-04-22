@@ -31,6 +31,14 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload --env-file .env
 ```
 
+### Database Setup
+Tables are created via SQLAlchemy. In `backend/app/main.py`, 
+uncomment this line once before first run:
+```python
+Base.metadata.create_all(bind=engine)
+```
+Then comment it out again after tables are created.
+
 ### Frontend
 ```bash
 cd frontend
