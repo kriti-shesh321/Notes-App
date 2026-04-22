@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 from datetime import datetime
 from typing import Optional
 from uuid import UUID
@@ -30,9 +30,15 @@ class NoteCreate(BaseModel):
 
 
 class NoteUpdate(BaseModel):
-    title: str
+    title: Optional[str] = None
     content: Optional[str] = None
     updated_at: datetime
+
+    @model_validator(mode="after")
+    def check_at_least_one_field(self):
+        if self.title is None and self.content is None:
+            raise ValueError("At least one of title or content must be provided")
+        return self
 
 
 class NoteOut(BaseModel):
