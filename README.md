@@ -2,9 +2,9 @@
 
 A full-stack notes application demonstrating secure authentication and CRUD operations for Notes.
 
-**Live Demo:** https://notes-add-app.netlify.app  
-**API Base URL:** https://notes-app-production-c23f.up.railway.app
-**API Documentation:** https://documenter.getpostman.com/view/17086606/2sBXqFNNCY
+- **Live Demo:** https://notes-add-app.netlify.app
+- **API Base URL:** https://notes-app-production-c23f.up.railway.app
+- **API Documentation:** https://documenter.getpostman.com/view/17086606/2sBXqFNNCY
 
 ## Tech Stack
 - **Backend:** FastAPI, SQLAlchemy, JWT (HS256)
