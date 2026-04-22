@@ -35,7 +35,7 @@ def update_note(note_id: int, payload: NoteUpdate, db: Session = Depends(get_db)
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Stale update. Reload the note.")
 
     note.title = payload.title
-    note.content = payload.content or ""
+    note.content = payload.content if payload.content is not None else note.content
     db.add(note)
     db.commit()
     db.refresh(note)

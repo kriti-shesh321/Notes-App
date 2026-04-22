@@ -18,20 +18,28 @@ ACCESS_TOKEN_EXPIRE_MIN = int(os.getenv("ACCESS_TOKEN_EXPIRE_MIN", "60"))
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
+
 def get_password_hash(password: str) -> str:
     return bcrypt.hash(password)
+
 
 def verify_password(password: str, password_hash: str) -> bool:
     return bcrypt.verify(password, password_hash)
 
-def create_access_token(sub: str, expires_minutes: int = ACCESS_TOKEN_EXPIRE_MIN) -> str:
+
+def create_access_token(
+    sub: str, expires_minutes: int = ACCESS_TOKEN_EXPIRE_MIN
+) -> str:
     now = datetime.now(timezone.utc)
     payload = {"sub": sub, "iat": int(now.timestamp())}
     if expires_minutes:
         payload["exp"] = int((now + timedelta(minutes=expires_minutes)).timestamp())
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
 
-def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)) -> User:
+
+def get_current_user(
+    token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)
+) -> User:
     cred_exc = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
